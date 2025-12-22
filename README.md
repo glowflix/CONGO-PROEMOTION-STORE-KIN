@@ -208,4 +208,3 @@ Pour toute question, consultez la documentation dans `GOOGLE_SHEETS_SETUP.md` ou
 ## 📄 Licence
 
 © 2024 Congo Promotion Store. Tous droits réservés.
-
