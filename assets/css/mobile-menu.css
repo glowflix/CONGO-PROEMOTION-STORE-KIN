@@ -1,0 +1,315 @@
+/* ============================================
+   MENU MOBILE - STYLE INSTAGRAM
+   ============================================ */
+
+/* Bouton Hamburger */
+.mobile-menu-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1001;
+    transition: transform 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-menu-toggle:active {
+    transform: scale(0.9);
+}
+
+.mobile-menu-toggle i {
+    display: block;
+}
+
+/* Overlay du menu mobile */
+.mobile-menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 9998;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.mobile-menu-overlay.active {
+    opacity: 1;
+}
+
+/* Menu mobile (slide depuis le bas) */
+.mobile-menu {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg-secondary);
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    padding: 1.5rem 0;
+    z-index: 9999;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.3);
+    max-height: 85vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.mobile-menu.active {
+    transform: translateY(0);
+}
+
+/* Poignée de drag (comme Instagram) */
+.mobile-menu-handle {
+    width: 40px;
+    height: 4px;
+    background: var(--text-muted);
+    border-radius: 2px;
+    margin: 0 auto 1.5rem;
+    cursor: grab;
+}
+
+.mobile-menu-handle:active {
+    cursor: grabbing;
+}
+
+/* Contenu du menu mobile */
+.mobile-menu-content {
+    padding: 0 1.5rem;
+}
+
+/* Items du menu mobile */
+.mobile-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: rgba(59, 130, 246, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.mobile-menu-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.mobile-menu-item:active::before {
+    left: 100%;
+}
+
+.mobile-menu-item:hover,
+.mobile-menu-item:active {
+    background: var(--bg-hover);
+    transform: translateX(4px);
+}
+
+.mobile-menu-item.active {
+    background: var(--bg-hover);
+    color: var(--accent-primary);
+}
+
+.mobile-menu-item i {
+    font-size: 1.5rem;
+    width: 24px;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+.mobile-menu-item.active i {
+    color: var(--accent-primary);
+}
+
+.mobile-menu-item span {
+    font-size: 1.1rem;
+    font-weight: 500;
+    flex: 1;
+}
+
+/* Badge pour le panier - Amélioré */
+.mobile-menu-item .cart-badge {
+    background: var(--accent-danger);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.2rem 0.5rem;
+    border-radius: 12px;
+    min-width: 22px;
+    height: 22px;
+    text-align: center;
+    display: none;
+    line-height: 1.4;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+}
+
+.mobile-menu-item .cart-badge.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Séparateur */
+.mobile-menu-divider {
+    height: 1px;
+    background: var(--border-color);
+    margin: 1rem 1.5rem;
+}
+
+/* Section actions rapides */
+.mobile-menu-actions {
+    padding: 1rem 1.5rem;
+    display: flex;
+    gap: 1rem;
+    border-top: 1px solid var(--border-color);
+    margin-top: 1rem;
+    padding-top: 1.5rem;
+}
+
+.mobile-menu-action {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: rgba(59, 130, 246, 0.2);
+}
+
+.mobile-menu-action:active {
+    transform: scale(0.95);
+    background: var(--bg-hover);
+}
+
+.mobile-menu-action i {
+    font-size: 1.5rem;
+    color: var(--accent-primary);
+}
+
+.mobile-menu-action span {
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Animation d'entrée pour les items */
+.mobile-menu-item {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: mobileMenuItemSlideIn 0.3s ease forwards;
+}
+
+.mobile-menu-item:nth-child(1) { animation-delay: 0.05s; }
+.mobile-menu-item:nth-child(2) { animation-delay: 0.1s; }
+.mobile-menu-item:nth-child(3) { animation-delay: 0.15s; }
+.mobile-menu-item:nth-child(4) { animation-delay: 0.2s; }
+.mobile-menu-item:nth-child(5) { animation-delay: 0.25s; }
+.mobile-menu-item:nth-child(6) { animation-delay: 0.3s; }
+
+@keyframes mobileMenuItemSlideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   RESPONSIVE - AFFICHAGE MOBILE
+   ============================================ */
+
+@media (max-width: 768px) {
+    /* Afficher le bouton hamburger */
+    .mobile-menu-toggle {
+        display: block;
+    }
+    
+    /* Cacher le menu desktop */
+    .nav-menu {
+        display: none !important;
+    }
+    
+    /* Afficher le menu mobile quand actif */
+    .mobile-menu-overlay.active,
+    .mobile-menu.active {
+        display: block;
+    }
+    
+    /* Empêcher le scroll du body quand le menu est ouvert */
+    body.menu-open {
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+    }
+}
+
+/* Animation de fermeture */
+.mobile-menu.closing {
+    animation: mobileMenuClose 0.3s ease forwards;
+}
+
+@keyframes mobileMenuClose {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(100%);
+    }
+}
+
+/* Amélioration pour très petits écrans */
+@media (max-width: 480px) {
+    .mobile-menu {
+        max-height: 90vh;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+    }
+    
+    .mobile-menu-item {
+        padding: 1.25rem 1rem;
+    }
+    
+    .mobile-menu-item i {
+        font-size: 1.4rem;
+    }
+    
+    .mobile-menu-item span {
+        font-size: 1rem;
+    }
+}
+
+/* Support pour prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+    .mobile-menu,
+    .mobile-menu-overlay,
+    .mobile-menu-item {
+        transition: none;
+        animation: none;
+    }
+}
+

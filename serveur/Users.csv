@@ -1,0 +1,4 @@
+id,displayName,avatarUrl,emailHash,role,theme,createdAt,lastSeenAt,status
+USER_1704067200000_admin,Admin Store,,5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542b,admin,dark,2024-01-01T10:00:00Z,2024-01-15T14:30:00Z,active
+USER_1704153600000_user1,Jean Dupont,,6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b,user,auto,2024-01-02T10:00:00Z,2024-01-14T16:20:00Z,active
+USER_1704240000000_user2,Marie Kabasele,,d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35,user,light,2024-01-03T10:00:00Z,2024-01-13T09:15:00Z,active

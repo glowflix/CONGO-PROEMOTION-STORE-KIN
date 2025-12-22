@@ -1,0 +1,139 @@
+/* ============================================
+   BOTTOM NAVIGATION BAR - STYLE INSTAGRAM
+   ============================================ */
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    padding: 0.5rem 0;
+    z-index: 1000;
+    display: none; /* Caché par défaut, affiché au scroll sur mobile */
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.bottom-nav.visible {
+    transform: translateY(0);
+}
+
+.bottom-nav-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 100%;
+    padding: 0 1rem;
+}
+
+.bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    padding: 0.5rem 1rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+    flex: 1;
+    min-width: 0;
+}
+
+.bottom-nav-item:active {
+    transform: scale(0.9);
+}
+
+.bottom-nav-item.active {
+    color: var(--accent-primary);
+}
+
+.bottom-nav-item i {
+    font-size: 1.5rem;
+    transition: transform 0.2s ease;
+}
+
+.bottom-nav-item.active i {
+    transform: scale(1.1);
+}
+
+.bottom-nav-item span {
+    font-size: 0.7rem;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+/* Badge pour le panier */
+.bottom-nav-item .nav-badge {
+    position: absolute;
+    top: 0.25rem;
+    right: 0.75rem;
+    background: var(--accent-danger);
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 0.2rem 0.4rem;
+    border-radius: 10px;
+    min-width: 18px;
+    text-align: center;
+    display: none;
+    line-height: 1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.bottom-nav-item .nav-badge.show {
+    display: block;
+}
+
+/* Animation d'entrée */
+@keyframes bottomNavSlideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.bottom-nav.visible {
+    animation: bottomNavSlideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Responsive - Afficher uniquement sur mobile */
+@media (max-width: 768px) {
+    .bottom-nav {
+        display: block;
+    }
+    
+    /* Ajouter un padding-bottom au body pour éviter que le contenu soit caché */
+    body.has-bottom-nav {
+        padding-bottom: 70px;
+    }
+}
+
+/* Cacher le menu du haut au scroll */
+.navbar.scrolled {
+    transform: translateY(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Support pour prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+    .bottom-nav,
+    .navbar.scrolled {
+        transition: none;
+        animation: none;
+    }
+}
+

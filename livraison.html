@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livraison à domicile - Congo Promotion Store</title>
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="stylesheet" href="/assets/css/checkout.css">
+    <link rel="stylesheet" href="/assets/css/delivery.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="/">
+                    <i class="fas fa-store"></i>
+                    <span>Congo Promotion Store</span>
+                </a>
+            </div>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Menu">
+                <i class="fas fa-bars" id="menuIcon"></i>
+            </button>
+            <div class="nav-menu">
+                <a href="/" class="nav-link"><i class="fas fa-home"></i> <span>Accueil</span></a>
+                <a href="/store.html" class="nav-link"><i class="fas fa-shopping-bag"></i> <span>Store</span></a>
+                <a href="/videos.html" class="nav-link"><i class="fas fa-video"></i> <span>Vidéos</span></a>
+                <a href="/profile.html" class="nav-link"><i class="fas fa-user"></i> <span>Profil</span></a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page principale -->
+    <main class="delivery-page">
+        <div class="container">
+            <div class="delivery-header section-animate">
+                <h1 class="fade-in"><i class="fas fa-truck"></i> Livraison à domicile</h1>
+                <p class="fade-in fade-in-delay-1">Commandez et suivez votre livraison en temps réel</p>
+            </div>
+
+            <!-- Étape 1: Sélection de l'adresse -->
+            <section class="delivery-section" id="addressSection">
+                <div class="section-header">
+                    <h2><i class="fas fa-map-marker-alt"></i> 1. Votre adresse de livraison</h2>
+                </div>
+                
+                <div class="delivery-form-container">
+                    <form id="deliveryAddressForm" class="delivery-form">
+                        <div class="form-group">
+                            <label>Nom complet *</label>
+                            <input type="text" name="fullName" id="customerName" required placeholder="Votre nom complet">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Téléphone *</label>
+                            <input type="tel" name="phone" id="customerPhone" required placeholder="+243 XXX XXX XXX">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Adresse de livraison *</label>
+                            <div class="address-input-container">
+                                <textarea name="address" id="deliveryAddressInput" rows="3" required placeholder="Tapez votre adresse complète ou cliquez sur la carte"></textarea>
+                                <button type="button" class="btn btn-secondary" id="useCurrentLocationBtn">
+                                    <i class="fas fa-location-arrow"></i> Ma position
+                                </button>
+                            </div>
+                            <div class="address-suggestions" id="addressSuggestions"></div>
+                        </div>
+                    </form>
+
+                    <!-- Carte pour sélectionner l'adresse -->
+                    <div class="map-container" id="addressMap">
+                        <div class="map-loading">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>Chargement de la carte...</p>
+                        </div>
+                    </div>
+
+                    <!-- Informations de livraison -->
+                    <div class="delivery-info-card" id="deliveryInfoCard">
+                        <div class="info-row">
+                            <i class="fas fa-route"></i>
+                            <div>
+                                <span class="info-label">Distance:</span>
+                                <span class="info-value" id="deliveryDistance">-</span>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <i class="fas fa-dollar-sign"></i>
+                            <div>
+                                <span class="info-label">Frais de livraison:</span>
+                                <span class="info-value" id="deliveryFee">Calcul en cours...</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-primary btn-large" id="confirmAddressBtn">
+                        <i class="fas fa-check"></i> Confirmer l'adresse
+                    </button>
+                </div>
+            </section>
+
+            <!-- Étape 2: Résumé et confirmation -->
+            <section class="delivery-section" id="summarySection" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-shopping-cart"></i> 2. Résumé de la commande</h2>
+                </div>
+
+                <div class="order-summary-card">
+                    <div class="summary-products" id="summaryProducts">
+                        <!-- Les produits seront chargés ici -->
+                    </div>
+                    
+                    <div class="summary-totals">
+                        <div class="total-row">
+                            <span>Sous-total:</span>
+                            <span id="summarySubtotal">0 CDF</span>
+                        </div>
+                        <div class="total-row">
+                            <span>Frais de livraison:</span>
+                            <span id="summaryDeliveryFee">0 CDF</span>
+                        </div>
+                        <div class="total-row total-final">
+                            <span>Total:</span>
+                            <strong id="summaryTotal">0 CDF</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-primary btn-large" id="confirmOrderBtn">
+                    <i class="fas fa-paper-plane"></i> Confirmer la commande
+                </button>
+            </section>
+
+            <!-- Étape 3: Suivi de la livraison -->
+            <section class="delivery-section" id="trackingSection" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-shipping-fast"></i> 3. Suivi de la livraison</h2>
+                    <p class="delivery-id">Numéro de commande: <strong id="deliveryIdDisplay">-</strong></p>
+                </div>
+
+                <!-- Statut de la livraison -->
+                <div class="delivery-status-card" id="deliveryStatusCard">
+                    <div class="status-timeline">
+                        <div class="timeline-item active" data-status="pending">
+                            <div class="timeline-icon"><i class="fas fa-clock"></i></div>
+                            <div class="timeline-content">
+                                <h4>Commande confirmée</h4>
+                                <p>En attente d'un livreur</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item" data-status="assigned">
+                            <div class="timeline-icon"><i class="fas fa-user"></i></div>
+                            <div class="timeline-content">
+                                <h4>Livreur assigné</h4>
+                                <p>Votre commande est en route</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item" data-status="in_transit">
+                            <div class="timeline-icon"><i class="fas fa-truck"></i></div>
+                            <div class="timeline-content">
+                                <h4>En cours de livraison</h4>
+                                <p>Arrivée prévue sous peu</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item" data-status="delivered">
+                            <div class="timeline-icon"><i class="fas fa-check-circle"></i></div>
+                            <div class="timeline-content">
+                                <h4>Livré</h4>
+                                <p>Commande reçue</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Informations du livreur -->
+                <div class="driver-info-card" id="driverInfoCard" style="display: none;">
+                    <div class="driver-header">
+                        <div class="driver-avatar">
+                            <img id="driverAvatar" src="" alt="Livreur">
+                            <span class="driver-status-badge" id="driverStatusBadge">
+                                <i class="fas fa-circle"></i>
+                            </span>
+                        </div>
+                        <div class="driver-details">
+                            <h3 id="driverName">-</h3>
+                            <p class="driver-vehicle" id="driverVehicle">
+                                <i class="fas fa-motorcycle"></i> <span id="driverVehicleType">-</span>
+                            </p>
+                            <p class="driver-rating">
+                                <i class="fas fa-star"></i> <span id="driverRating">-</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="driver-contact">
+                        <a href="#" id="driverWhatsAppLink" class="btn btn-success" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Contacter sur WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Produit à livrer -->
+                <div class="delivery-product-card">
+                    <h4><i class="fas fa-box"></i> Produit à livrer</h4>
+                    <div id="deliveryProductInfo">
+                        <!-- Le produit sera chargé ici -->
+                    </div>
+                </div>
+
+                <!-- Carte de suivi en temps réel -->
+                <div class="tracking-map-container">
+                    <h4><i class="fas fa-map"></i> Suivi en temps réel</h4>
+                    <div class="map-container" id="trackingMap" style="position: relative;">
+                        <div class="map-loading">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>Chargement de la carte de suivi...</p>
+                        </div>
+                    </div>
+                    <div class="map-legend">
+                        <div class="legend-item">
+                            <div class="legend-marker" style="background: #22c55e;"></div>
+                            <span><strong>Votre adresse</strong></span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-marker" style="background: #3b82f6;"></div>
+                            <span><strong>Position du livreur</strong></span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-marker" style="background: #facc15; width: 20px; height: 4px; border-radius: 2px;"></div>
+                            <span><strong>Itinéraire</strong></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Congo Promotion Store</h3>
+                    <p>Livraison rapide et sécurisée dans toute la ville.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Liens rapides</h4>
+                    <ul>
+                        <li><a href="/store.html">Store</a></li>
+                        <li><a href="/videos.html">Vidéos</a></li>
+                        <li><a href="/profile.html">Profil</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Congo Promotion Store. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/api.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="/assets/js/delivery.js"></script>
+</body>
+</html>
+

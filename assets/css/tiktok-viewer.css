@@ -1,0 +1,786 @@
+/* ============================================
+   VIEWER TIKTOK/SHORTS - DÉFILEMENT VERTICAL
+   ============================================ */
+
+.tiktok-viewer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 10000;
+    display: none;
+    overflow: hidden;
+}
+
+.tiktok-viewer.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tiktok-viewer-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Bouton fermer */
+.tiktok-viewer-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 10001;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+}
+
+.tiktok-viewer-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+/* Conteneur des vidéos avec scroll vertical */
+.tiktok-viewer-videos {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.tiktok-viewer-videos::-webkit-scrollbar {
+    display: none;
+}
+
+/* Wrapper de chaque vidéo */
+.tiktok-video-wrapper {
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Conteneur vidéo */
+.tiktok-video-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    cursor: pointer;
+}
+
+/* Barre de progression */
+.tiktok-progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.15);
+    z-index: 10002;
+    cursor: pointer;
+    transition: height 0.3s ease;
+}
+
+.tiktok-progress-bar:hover {
+    height: 6px;
+}
+
+.tiktok-progress-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.tiktok-progress-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    transition: width 0.1s linear;
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+.tiktok-progress-handle {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 14px;
+    height: 14px;
+    background: white;
+    border-radius: 50%;
+    cursor: grab;
+    opacity: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 12px rgba(59, 130, 246, 0.8);
+    border: 2px solid var(--accent-primary);
+}
+
+.tiktok-progress-bar:hover {
+    height: 6px;
+}
+
+.tiktok-progress-bar:hover .tiktok-progress-handle {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
+}
+
+.tiktok-progress-handle:active {
+    cursor: grabbing;
+    transform: translate(-50%, -50%) scale(1.4);
+}
+
+/* Indicateurs double-tap */
+.tiktok-double-tap-indicator {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 80px;
+    height: 80px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(20px);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    z-index: 10003;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.tiktok-double-tap-indicator.left {
+    left: 20%;
+}
+
+.tiktok-double-tap-indicator.right {
+    right: 20%;
+}
+
+.tiktok-double-tap-indicator.show {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.2);
+}
+
+.tiktok-double-tap-indicator i {
+    font-size: 2rem;
+    margin-bottom: 0.25rem;
+}
+
+.tiktok-double-tap-indicator span {
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* Élément vidéo */
+.tiktok-video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #000;
+}
+
+/* Overlay avec informations et contrôles */
+.tiktok-video-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+    padding: 2rem 1.5rem;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.tiktok-video-info {
+    margin-bottom: 1rem;
+    pointer-events: auto;
+}
+
+.tiktok-video-title {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.tiktok-video-stats {
+    display: flex;
+    gap: 2rem;
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1rem;
+    margin-top: 0.75rem;
+}
+
+.tiktok-stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.tiktok-stat-item:hover {
+    background: rgba(0, 0, 0, 0.5);
+    transform: scale(1.05);
+}
+
+.tiktok-stat-item i {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.tiktok-stat-item .stat-value {
+    font-weight: 600;
+    font-size: 1rem;
+    color: white;
+}
+
+.tiktok-like-btn.liked i {
+    color: #ff3040;
+    animation: likePulse 0.3s ease;
+}
+
+.tiktok-comment-btn:hover i {
+    color: var(--accent-primary);
+}
+
+/* Contrôles vidéo */
+.tiktok-video-controls {
+    display: flex;
+    gap: 1rem;
+    pointer-events: auto;
+}
+
+.tiktok-control-btn {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 1.3rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.tiktok-control-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.15);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.tiktok-control-btn:active {
+    transform: scale(0.9);
+}
+
+.tiktok-control-btn.play-pause {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    background: rgba(59, 130, 246, 0.3);
+    border-color: var(--accent-primary);
+}
+
+/* Indicateurs de navigation */
+.tiktok-viewer-indicators {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    z-index: 10001;
+}
+
+.tiktok-indicator {
+    width: 6px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tiktok-indicator.active {
+    background: var(--accent-primary);
+    height: 60px;
+}
+
+.tiktok-indicator:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .tiktok-viewer-container {
+        max-width: 100%;
+    }
+
+    .tiktok-video-wrapper {
+        height: 100vh;
+        min-height: 100vh;
+    }
+
+    .tiktok-video-overlay {
+        padding: 1.5rem 1rem;
+    }
+
+    .tiktok-video-title {
+        font-size: 1rem;
+    }
+
+    .tiktok-video-stats {
+        font-size: 0.9rem;
+        gap: 1.5rem;
+    }
+
+    .tiktok-stat-item {
+        padding: 0.4rem 0.8rem;
+        gap: 0.5rem;
+    }
+
+    .tiktok-stat-item i {
+        font-size: 1.1rem;
+    }
+
+    .tiktok-stat-item .stat-value {
+        font-size: 0.9rem;
+    }
+
+    .tiktok-control-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 1.2rem;
+    }
+
+    .tiktok-control-btn.play-pause {
+        width: 56px;
+        height: 56px;
+        font-size: 1.4rem;
+    }
+
+    .tiktok-double-tap-indicator {
+        width: 70px;
+        height: 70px;
+    }
+
+    .tiktok-double-tap-indicator i {
+        font-size: 1.5rem;
+    }
+
+    .tiktok-double-tap-indicator.left {
+        left: 15%;
+    }
+
+    .tiktok-double-tap-indicator.right {
+        right: 15%;
+    }
+
+    .tiktok-viewer-close {
+        top: 0.5rem;
+        right: 0.5rem;
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .tiktok-viewer-indicators {
+        right: 0.5rem;
+    }
+
+    .tiktok-indicator {
+        width: 4px;
+        height: 30px;
+    }
+
+    .tiktok-indicator.active {
+        height: 50px;
+    }
+
+    .tiktok-progress-handle {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .tiktok-video-overlay {
+        padding: 1rem 0.75rem;
+    }
+
+    .tiktok-video-title {
+        font-size: 0.9rem;
+    }
+
+    .tiktok-video-stats {
+        font-size: 0.85rem;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .tiktok-stat-item {
+        padding: 0.35rem 0.7rem;
+        gap: 0.4rem;
+    }
+
+    .tiktok-stat-item i {
+        font-size: 1rem;
+    }
+
+    .tiktok-stat-item .stat-value {
+        font-size: 0.85rem;
+    }
+
+    .tiktok-control-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+    }
+
+    .tiktok-control-btn.play-pause {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+    }
+
+    .tiktok-double-tap-indicator {
+        width: 60px;
+        height: 60px;
+    }
+
+    .tiktok-double-tap-indicator i {
+        font-size: 1.3rem;
+    }
+
+    .tiktok-double-tap-indicator span {
+        font-size: 0.65rem;
+    }
+}
+
+/* Sidebar commentaires - Style compact TikTok */
+.tiktok-sidebar {
+    position: absolute;
+    right: -350px;
+    top: 0;
+    width: 350px;
+    max-width: 85vw;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.98);
+    backdrop-filter: blur(30px);
+    transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10002;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tiktok-sidebar.active {
+    right: 0;
+}
+
+@media (max-width: 768px) {
+    .tiktok-sidebar {
+        width: 100%;
+        max-width: 100%;
+        right: -100%;
+    }
+    
+    .tiktok-sidebar.active {
+        right: 0;
+    }
+}
+
+.tiktok-sidebar-header {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.03);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.tiktok-sidebar-header h4 {
+    color: white;
+    font-size: 1.1rem;
+    margin: 0;
+    font-weight: 600;
+}
+
+.tiktok-sidebar-close {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+}
+
+.tiktok-sidebar-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.tiktok-comments-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.75rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.tiktok-comments-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.tiktok-comments-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.tiktok-comments-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+
+.tiktok-comments-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.tiktok-comments-loading,
+.tiktok-no-comments,
+.tiktok-comments-error {
+    text-align: center;
+    padding: 2rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.tiktok-comment-item {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.75rem 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background 0.2s ease;
+}
+
+.tiktok-comment-item:hover {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+}
+
+.tiktok-comment-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-shrink: 0;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.tiktok-comment-content {
+    flex: 1;
+}
+
+.tiktok-comment-author {
+    font-weight: 600;
+    color: white;
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+}
+
+.tiktok-comment-text {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+}
+
+.tiktok-comment-meta {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.tiktok-comment-form {
+    padding: 0.75rem 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+}
+
+.tiktok-comment-input {
+    flex: 1;
+    padding: 0.65rem 1rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    color: white;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+}
+
+.tiktok-comment-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.tiktok-comment-input:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.tiktok-comment-submit {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--accent-primary);
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.tiktok-comment-submit:hover {
+    transform: scale(1.1);
+}
+
+.tiktok-comment-submit:active {
+    transform: scale(0.95);
+}
+
+/* Bouton like animé amélioré */
+.tiktok-like-btn {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tiktok-like-btn:hover {
+    transform: scale(1.1);
+    background: rgba(255, 48, 64, 0.2) !important;
+}
+
+.tiktok-like-btn.liked {
+    background: rgba(255, 48, 64, 0.3) !important;
+}
+
+.tiktok-like-btn.liked i {
+    color: #ff3040 !important;
+    animation: likePulse 0.3s ease;
+}
+
+@keyframes likePulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.4);
+    }
+}
+
+.tiktok-comment-btn {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tiktok-comment-btn:hover {
+    transform: scale(1.1);
+    background: rgba(59, 130, 246, 0.2) !important;
+}
+
+.tiktok-comment-btn:hover i {
+    color: var(--accent-primary) !important;
+}
+
+/* Animation d'entrée */
+.tiktok-viewer.active .tiktok-video-wrapper {
+    animation: tiktokFadeIn 0.4s ease-out;
+}
+
+@keyframes tiktokFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Support pour le scroll snap sur mobile */
+@supports (scroll-snap-type: y mandatory) {
+    .tiktok-viewer-videos {
+        scroll-snap-type: y mandatory;
+    }
+    
+    .tiktok-video-wrapper {
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+    }
+}
+

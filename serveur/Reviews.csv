@@ -1,0 +1,4 @@
+id,productId,userId,userName,rating,content,status,createdAt
+REV_1704067200000_001,PROD_1704067200000_smartphone,USER_1704153600000_user1,Jean Dupont,5,"Produit exceptionnel ! Qualité premium, performances au top. Le meilleur smartphone que j'ai eu. Livraison rapide et emballage soigné.",approved,2024-01-08T10:00:00Z
+REV_1704153600000_002,PROD_1704067200000_smartphone,USER_1704240000000_user2,Marie Kabasele,4,"Très bon téléphone, mais le prix est un peu élevé. Les fonctionnalités sont excellentes cependant.",approved,2024-01-09T11:30:00Z
+REV_1704240000000_003,PROD_1704153600000_iphone,USER_1704153600000_user1,Jean Dupont,5,"iPhone de qualité, design magnifique. L'iOS est fluide et les applications fonctionnent parfaitement.",approved,2024-01-10T09:00:00Z

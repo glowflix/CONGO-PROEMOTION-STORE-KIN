@@ -1,0 +1,4 @@
+id,productId,userId,userName,content,parentId,likesCount,status,createdAt
+COMM_1704067200000_001,PROD_1704067200000_smartphone,USER_1704153600000_user1,Jean Dupont,Excellent smartphone ! L'écran est magnifique et les photos sont de très bonne qualité. Je recommande vivement.,,12,approved,2024-01-05T12:00:00Z
+COMM_1704153600000_002,PROD_1704067200000_smartphone,USER_1704240000000_user2,Marie Kabasele,"La batterie tient vraiment toute la journée, même avec un usage intensif. Très satisfaite de mon achat !",,8,approved,2024-01-06T14:30:00Z
+COMM_1704240000000_003,PROD_1704067200000_smartphone,USER_1704153600000_user1,Jean Dupont,Merci pour votre retour ! Combien de temps avez-vous eu besoin pour vous y habituer ?,COMM_1704153600000_002,3,approved,2024-01-06T16:00:00Z

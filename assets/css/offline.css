@@ -1,0 +1,127 @@
+/* ============================================
+   STYLES MODE HORS LIGNE
+   ============================================ */
+
+.cache-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    animation: cacheInfoSlideIn 0.4s ease-out;
+}
+
+.cache-info i {
+    color: var(--accent-warning);
+    font-size: 1rem;
+}
+
+@keyframes cacheInfoSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Badge mode hors ligne */
+.offline-badge {
+    position: fixed;
+    top: 70px;
+    right: 1rem;
+    background: var(--accent-warning);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-md);
+    font-size: 0.85rem;
+    font-weight: 600;
+    z-index: 999;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    animation: offlineBadgeSlideIn 0.4s ease-out;
+}
+
+.offline-badge i {
+    font-size: 1rem;
+}
+
+@keyframes offlineBadgeSlideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Message d'erreur amélioré pour mode hors ligne */
+.offline-message {
+    text-align: center;
+    padding: 2rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    margin: 2rem 0;
+}
+
+.offline-message i {
+    font-size: 3rem;
+    color: var(--accent-warning);
+    margin-bottom: 1rem;
+}
+
+.offline-message h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.offline-message p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+/* Animation pulse pour indicateur de connexion */
+.connection-status {
+    position: fixed;
+    top: 70px;
+    right: 1rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent-success);
+    z-index: 999;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+    animation: connectionPulse 2s ease-in-out infinite;
+}
+
+.connection-status.offline {
+    background: var(--accent-danger);
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+}
+
+@keyframes connectionPulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.1);
+    }
+}
+

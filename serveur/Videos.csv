@@ -1,0 +1,4 @@
+id,title,videoUrl,coverUrl,productId,likesCount,commentsCount,viewsCount,createdAt
+VID_1704067200000_demo1,Unboxing Samsung Galaxy S23 Ultra - Test Complet,https://videos.pexels.com/video-files/3045163/3045163-hd_1920_1080_30fps.mp4,https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&q=80,PROD_1704067200000_smartphone,120,15,1500,2024-01-12T10:00:00Z
+VID_1704153600000_demo2,Test Performance iPhone 15 Pro Max - Gaming & Photo,https://videos.pexels.com/video-files/3045163/3045163-hd_1920_1080_30fps.mp4,https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&q=80,PROD_1704153600000_iphone,89,12,980,2024-01-13T14:30:00Z
+VID_1704240000000_demo3,Chaussures Running - Test Course 10km,https://videos.pexels.com/video-files/3045163/3045163-hd_1920_1080_30fps.mp4,https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80,PROD_1704499200000_shoes,67,9,756,2024-01-14T11:00:00Z

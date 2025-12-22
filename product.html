@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Congo Promotion Store - Produit</title>
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="stylesheet" href="/assets/css/product.css">
+    <link rel="stylesheet" href="/assets/css/cart.css">
+    <link rel="stylesheet" href="/assets/css/animations.css">
+    <link rel="stylesheet" href="/assets/css/mobile-menu.css">
+    <link rel="stylesheet" href="/assets/css/bottom-nav.css">
+    <link rel="stylesheet" href="/assets/css/checkout.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="/">
+                    <i class="fas fa-store"></i>
+                    <span>Congo Promotion Store</span>
+                </a>
+            </div>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Menu">
+                <i class="fas fa-bars" id="menuIcon"></i>
+            </button>
+            <div class="nav-menu">
+                <a href="/" class="nav-link"><i class="fas fa-home"></i> <span>Accueil</span></a>
+                <a href="/store.html" class="nav-link"><i class="fas fa-shopping-bag"></i> <span>Store</span></a>
+                <a href="/videos.html" class="nav-link"><i class="fas fa-video"></i> <span>Vidéos</span></a>
+                <a href="/profile.html" class="nav-link"><i class="fas fa-user"></i> <span>Profil</span></a>
+                <button class="nav-link cart-toggle" id="cartToggle" style="position: relative;">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-badge" id="cartBadge" style="display: none;">0</span>
+                </button>
+                <button class="theme-toggle" id="themeToggle" aria-label="Changer le thème">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Menu Mobile Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+    <!-- Menu Mobile (Style Instagram) -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-handle"></div>
+        <div class="mobile-menu-content">
+            <a href="/" class="mobile-menu-item" data-page="home">
+                <i class="fas fa-home"></i>
+                <span>Accueil</span>
+            </a>
+            <a href="/store.html" class="mobile-menu-item" data-page="store">
+                <i class="fas fa-shopping-bag"></i>
+                <span>Store</span>
+            </a>
+            <a href="/videos.html" class="mobile-menu-item" data-page="videos">
+                <i class="fas fa-video"></i>
+                <span>Vidéos</span>
+            </a>
+            <a href="/profile.html" class="mobile-menu-item" data-page="profile">
+                <i class="fas fa-user"></i>
+                <span>Profil</span>
+            </a>
+            <div class="mobile-menu-divider"></div>
+            <button class="mobile-menu-item cart-toggle" id="mobileCartToggle">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Panier</span>
+                <span class="cart-badge" id="mobileCartBadge"></span>
+            </button>
+            <button class="mobile-menu-item" id="mobileThemeToggle">
+                <i class="fas fa-moon" id="mobileThemeIcon"></i>
+                <span>Thème</span>
+            </button>
+        </div>
+        <div class="mobile-menu-actions">
+            <a href="/contact.html" class="mobile-menu-action">
+                <i class="fas fa-envelope"></i>
+                <span>Contact</span>
+            </a>
+            <a href="/store.html" class="mobile-menu-action">
+                <i class="fas fa-search"></i>
+                <span>Rechercher</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation Bar (Style Instagram) -->
+    <nav class="bottom-nav" id="bottomNav">
+        <div class="bottom-nav-content">
+            <a href="/profile.html" class="bottom-nav-item" data-page="profile">
+                <i class="fas fa-user"></i>
+                <span>Compte</span>
+            </a>
+            <a href="/store.html" class="bottom-nav-item cart-toggle" data-page="store" id="bottomNavCart">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Panier</span>
+                <span class="nav-badge" id="bottomNavBadge"></span>
+            </a>
+            <a href="/contact.html" class="bottom-nav-item" data-page="contact">
+                <i class="fas fa-envelope"></i>
+                <span>Contact</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Product Page -->
+    <main class="product-page">
+        <div class="container">
+            <div id="productLoading" class="loading-spinner">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Chargement du produit...</p>
+            </div>
+
+            <div id="productContent" style="display: none;">
+                <!-- Product Header -->
+                <div class="product-header">
+                    <a href="/store.html" class="back-link">
+                        <i class="fas fa-arrow-left"></i> Retour au store
+                    </a>
+                </div>
+
+                <!-- Product Main -->
+                <div class="product-main">
+                    <!-- Gallery & 3D -->
+                    <div class="product-media">
+                        <div class="product-gallery" id="productGallery">
+                            <!-- Images seront injectées ici -->
+                        </div>
+                        
+                        <!-- Vue 3D -->
+                        <div class="product-3d" id="product3D" style="display: none;">
+                            <h3><i class="fas fa-cube"></i> Vue 3D Interactive</h3>
+                            <model-viewer
+                                id="modelViewer"
+                                src=""
+                                alt="3D product view"
+                                camera-controls
+                                touch-action="pan-y"
+                                auto-rotate
+                                rotation-per-second="20deg"
+                                style="width:100%; height:420px; background:transparent; border-radius:16px;">
+                            </model-viewer>
+                            <p class="3d-hint">Faites glisser pour faire tourner • Pincez pour zoomer</p>
+                        </div>
+
+                        <!-- Toggle 3D/Photos -->
+                        <div class="media-toggle">
+                            <button class="btn btn-secondary active" id="togglePhotos">
+                                <i class="fas fa-images"></i> Photos
+                            </button>
+                            <button class="btn btn-secondary" id="toggle3D">
+                                <i class="fas fa-cube"></i> Vue 3D
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Product Info -->
+                    <div class="product-info-section">
+                        <div class="product-badges" id="productBadges"></div>
+                        <h1 id="productTitle"></h1>
+                        <div class="product-price-rating">
+                            <div class="product-price" id="productPrice"></div>
+                            <div class="product-rating" id="productRating"></div>
+                        </div>
+                        <p class="product-description" id="productDescription"></p>
+                        
+                        <div class="product-actions">
+                            <button class="btn btn-primary add-to-cart-btn" id="addToCartBtn">
+                                <i class="fas fa-shopping-cart"></i> Ajouter au panier
+                            </button>
+                            <button class="btn btn-secondary" id="likeBtn">
+                                <i class="far fa-heart"></i>
+                                <span id="likeCount">0</span>
+                            </button>
+                            <button class="btn btn-secondary" id="shareBtn">
+                                <i class="fas fa-share"></i> Partager
+                            </button>
+                        </div>
+
+                        <!-- Stock Info -->
+                        <div class="product-stock" id="productStock"></div>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <div class="product-tabs">
+                    <button class="tab-btn active" data-tab="reviews">
+                        <i class="fas fa-star"></i> Avis (<span id="reviewsCount">0</span>)
+                    </button>
+                    <button class="tab-btn" data-tab="comments">
+                        <i class="fas fa-comments"></i> Commentaires (<span id="commentsCount">0</span>)
+                    </button>
+                </div>
+
+                <!-- Reviews Section -->
+                <div class="tab-content active" id="reviewsTab">
+                    <div class="add-review-section">
+                        <h3>Ajouter un avis</h3>
+                        <div class="rating-input">
+                            <label>Note:</label>
+                            <div class="star-rating" id="starRating">
+                                <i class="far fa-star" data-rating="1"></i>
+                                <i class="far fa-star" data-rating="2"></i>
+                                <i class="far fa-star" data-rating="3"></i>
+                                <i class="far fa-star" data-rating="4"></i>
+                                <i class="far fa-star" data-rating="5"></i>
+                            </div>
+                            <span id="selectedRating">0</span>
+                        </div>
+                        <textarea id="reviewContent" placeholder="Partagez votre expérience..."></textarea>
+                        <button class="btn btn-primary" id="submitReviewBtn">Publier l'avis</button>
+                    </div>
+                    <div class="reviews-list" id="reviewsList"></div>
+                </div>
+
+                <!-- Comments Section -->
+                <div class="tab-content" id="commentsTab">
+                    <div class="add-comment-section">
+                        <textarea id="commentContent" placeholder="Ajouter un commentaire..."></textarea>
+                        <button class="btn btn-primary" id="submitCommentBtn">Publier</button>
+                    </div>
+                    <div class="comments-list" id="commentsList"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Congo Promotion Store</h3>
+                    <p>Votre destination pour les meilleurs produits avec vue 3D interactive.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Liens rapides</h4>
+                    <ul>
+                        <li><a href="/store.html">Store</a></li>
+                        <li><a href="/videos.html">Vidéos</a></li>
+                        <li><a href="/profile.html">Profil</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Légal</h4>
+                    <ul>
+                        <li><a href="/privacy.html">Confidentialité</a></li>
+                        <li><a href="/terms.html">CGU</a></li>
+                        <li><a href="/cookies.html">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Congo Promotion Store. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/api.js"></script>
+    <script src="/assets/js/debug.js"></script>
+    <script src="/assets/js/theme.js"></script>
+    <script src="/assets/js/cart.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="/assets/js/checkout.js"></script>
+    <script src="/assets/js/mobile-menu.js"></script>
+    <script src="/assets/js/bottom-nav.js"></script>
+    <script src="/assets/js/scroll-animations.js"></script>
+    <script src="/assets/js/product.js"></script>
+    
+    <!-- Footer Professionnel -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- À propos -->
+                <div class="footer-section">
+                    <h3><i class="fas fa-info-circle"></i> À propos</h3>
+                    <p>Congo Promotion Store est votre destination pour découvrir les meilleurs produits avec des prix promotionnels exceptionnels. Nous offrons une expérience d'achat moderne et sécurisée avec des vues 3D interactives.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Liens rapides -->
+                <div class="footer-section">
+                    <h3><i class="fas fa-link"></i> Liens rapides</h3>
+                    <ul>
+                        <li><a href="/"><i class="fas fa-home"></i> Accueil</a></li>
+                        <li><a href="/store.html"><i class="fas fa-shopping-bag"></i> Store</a></li>
+                        <li><a href="/videos.html"><i class="fas fa-video"></i> Vidéos</a></li>
+                        <li><a href="/contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Aide & Support -->
+                <div class="footer-section">
+                    <h3><i class="fas fa-question-circle"></i> Aide & Support</h3>
+                    <ul>
+                        <li><a href="/aide.html"><i class="fas fa-life-ring"></i> Centre d'aide</a></li>
+                        <li><a href="/faq.html"><i class="fas fa-question"></i> FAQ</a></li>
+                        <li><a href="/contact.html"><i class="fas fa-headset"></i> Support client</a></li>
+                        <li><a href="/livraison.html"><i class="fas fa-truck"></i> Livraison</a></li>
+                        <li><a href="/retours.html"><i class="fas fa-undo"></i> Retours</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Informations légales -->
+                <div class="footer-section">
+                    <h3><i class="fas fa-gavel"></i> Informations légales</h3>
+                    <ul>
+                        <li><a href="/confidentialite.html"><i class="fas fa-shield-alt"></i> Politique de confidentialité</a></li>
+                        <li><a href="/cgu.html"><i class="fas fa-file-contract"></i> Conditions d'utilisation</a></li>
+                        <li><a href="/cookies.html"><i class="fas fa-cookie"></i> Politique des cookies</a></li>
+                        <li><a href="/mentions-legales.html"><i class="fas fa-balance-scale"></i> Mentions légales</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <i class="fas fa-copyright"></i>
+                    <span>2024 Congo Promotion Store. Tous droits réservés.</span>
+                </div>
+                <div class="footer-links">
+                    <a href="/confidentialite.html">Confidentialité</a>
+                    <a href="/cgu.html">CGU</a>
+                    <a href="/cookies.html">Cookies</a>
+                    <a href="/mentions-legales.html">Mentions légales</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+

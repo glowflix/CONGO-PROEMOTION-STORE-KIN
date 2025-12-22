@@ -1,0 +1,49 @@
+<!-- Template pour ajouter le menu mobile à toutes les pages -->
+<!-- Copiez ce code après la balise </nav> dans chaque page HTML -->
+
+<!-- Menu Mobile Overlay -->
+<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+<!-- Menu Mobile (Style Instagram) -->
+<div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-handle"></div>
+    <div class="mobile-menu-content">
+        <a href="/" class="mobile-menu-item" data-page="home">
+            <i class="fas fa-home"></i>
+            <span>Accueil</span>
+        </a>
+        <a href="/store.html" class="mobile-menu-item" data-page="store">
+            <i class="fas fa-shopping-bag"></i>
+            <span>Store</span>
+        </a>
+        <a href="/videos.html" class="mobile-menu-item" data-page="videos">
+            <i class="fas fa-video"></i>
+            <span>Vidéos</span>
+        </a>
+        <a href="/profile.html" class="mobile-menu-item" data-page="profile">
+            <i class="fas fa-user"></i>
+            <span>Profil</span>
+        </a>
+        <div class="mobile-menu-divider"></div>
+        <button class="mobile-menu-item cart-toggle" id="mobileCartToggle">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Panier</span>
+            <span class="cart-badge" id="mobileCartBadge"></span>
+        </button>
+        <button class="mobile-menu-item" id="mobileThemeToggle">
+            <i class="fas fa-moon" id="mobileThemeIcon"></i>
+            <span>Thème</span>
+        </button>
+    </div>
+    <div class="mobile-menu-actions">
+        <a href="/contact.html" class="mobile-menu-action">
+            <i class="fas fa-envelope"></i>
+            <span>Contact</span>
+        </a>
+        <a href="/store.html" class="mobile-menu-action">
+            <i class="fas fa-search"></i>
+            <span>Rechercher</span>
+        </a>
+    </div>
+</div>
+
